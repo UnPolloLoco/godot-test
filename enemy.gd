@@ -1,13 +1,21 @@
 extends Area2D
 
 
-const SPEED = 500.0
+@onready var bullet_scene = preload("res://bullet.tscn")
+
+
+const BASE_SPEED = 500.0
+const MAX_SPEED = 1800.0
 var direction = Vector2(0,1)
 var movement_bound_pad = 100
 var max_y
 var min_y
 
-var health = 10
+var max_health = 50.0;
+var health = max_health;
+var is_dead = false;
+
+var total_timer_runs = 0;
 
 
 func _ready() -> void:
@@ -17,18 +25,25 @@ func _ready() -> void:
 	max_y = Global.height - movement_bound_pad
 	
 	modulate = Color(2, 0.3, 0.4)
-
 	
 	position = Vector2(
 		Global.width - 300,
 		Global.height / 2
 	)
+	
+	$EnemyTimer.start()
 
 
 
 func _physics_process(delta: float) -> void:
-	position += direction * SPEED * delta;
+	var speed = lerp(
+		BASE_SPEED, 
+		MAX_SPEED, 
+		1 - health/max_health
+	)
 
+	
+	position += direction * speed * delta;
 	position.y = clamp(position.y, min_y, max_y)
 	
 	if position.y == max_y:
@@ -38,11 +53,27 @@ func _physics_process(delta: float) -> void:
 
 
 func on_death():
-	print('enemy DEAD')
-	Global.damage_flash(self)
-	await get_tree().create_timer(Global.FLASH_DURATION).timeout
-	queue_free()
+	if (not is_dead):
+		is_dead = true
+		print('enemy DEAD')
+		
+		Global.damage_flash(self)
+		await get_tree().create_timer(Global.FLASH_DURATION).timeout
+		queue_free()
 
 func on_damage():
 	print('enenmy damaged')
 	Global.damage_flash(self)
+
+
+func _on_enemy_timer_timeout() -> void:
+	var shoot_chance = 0.3 + 0.7 * (1 - health/max_health)
+	if total_timer_runs > 5 and randf() < shoot_chance:
+		var new_bullet = bullet_scene.instantiate()
+
+		new_bullet.add_to_group('enemy')
+		new_bullet.position = position
+		
+		get_tree().root.add_child(new_bullet)
+		
+	total_timer_runs += 1

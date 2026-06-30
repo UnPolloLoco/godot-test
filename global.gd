@@ -13,10 +13,8 @@ func _ready():
 	height = size.y
 	
 	
-func _on_timer_timeout():
-	print('gurt')
-
 func damage_flash(target):
 	target.get_node('Sprite2D').material.set_shader_parameter('enabled', true)
 	await get_tree().create_timer(FLASH_DURATION).timeout
-	target.get_node('Sprite2D').material.set_shader_parameter('enabled', false)
+	if is_instance_valid(target):
+		target.get_node('Sprite2D').material.set_shader_parameter('enabled', false)

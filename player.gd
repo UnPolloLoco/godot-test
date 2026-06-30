@@ -7,7 +7,8 @@ extends Area2D
 const SPEED = 1100.0
 var direction
 
-var health = 5
+var health = 10
+var is_dead = false;
 
 
 func _ready() -> void:
@@ -37,15 +38,23 @@ func _input(event: InputEvent) -> void:
 		if event.is_action_pressed('shoot'):
 			var new_bullet = bullet_scene.instantiate()
 
-			new_bullet.add_to_group("ally")
+			new_bullet.add_to_group('ally')
 			new_bullet.position = position
 			
 			get_tree().root.add_child(new_bullet)
 
 
+
 func on_death():
-	print('player DEAD')
+	if (not is_dead):
+		is_dead = true
+		print('player DEAD')
+		
+		Global.damage_flash(self)
+		await get_tree().create_timer(Global.FLASH_DURATION).timeout
+		queue_free()
 	
 	
 func on_damage():
 	print('player damaged')
+	Global.damage_flash(self)
