@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b2lfq4pwtspdg"]
+
+[node name="Star" type="ColorRect" unique_id=546460975]
+offset_left = -333.0
+offset_top = 88.0
+offset_right = -313.0
+offset_bottom = 108.0

@@ -4,15 +4,21 @@ extends Area2D
 @onready var bullet_scene = preload("res://bullet.tscn")
 
 
-const SPEED = 900.0
+const SPEED = 1100.0
 var direction
+
+var health = 5
 
 
 func _ready() -> void:
+	add_to_group("ally")
+	
 	position = Vector2(
 		300,
-		Global.width / 2
+		Global.height / 2
 	)
+	
+	modulate = Color(0, 1, 0)
 
 
 func _physics_process(delta: float) -> void:
@@ -30,8 +36,16 @@ func _input(event: InputEvent) -> void:
 		# Shoot bullet
 		if event.is_action_pressed('shoot'):
 			var new_bullet = bullet_scene.instantiate()
-			get_tree().root.add_child(new_bullet)
-			
+
+			new_bullet.add_to_group("ally")
 			new_bullet.position = position
 			
-			print()
+			get_tree().root.add_child(new_bullet)
+
+
+func on_death():
+	print('player DEAD')
+	
+	
+func on_damage():
+	print('player damaged')

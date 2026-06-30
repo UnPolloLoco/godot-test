@@ -2,15 +2,22 @@
 
 [ext_resource type="Texture2D" uid="uid://c48ny0gh43exb" path="res://icon.svg" id="1_54c6x"]
 [ext_resource type="Script" uid="uid://dmfnuye5ydtuj" path="res://player.gd" id="1_gmyh6"]
+[ext_resource type="Shader" uid="uid://bryc1jesnxsj0" path="res://flash.gdshader" id="3_hp7mx"]
 [ext_resource type="Script" uid="uid://bljvxvt70cepj" path="res://enemy.gd" id="3_tak36"]
+[ext_resource type="Script" uid="uid://33y06bll57yw" path="res://background.gd" id="4_tjgvb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jcjwt"]
 size = Vector2(120, 121)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hp7mx"]
+shader = ExtResource("3_hp7mx")
+shader_parameter/enabled = false
+shader_parameter/brightness = 0.8
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0b1r"]
 size = Vector2(122, 122)
 
-[node name="Node2D" type="Node2D" unique_id=1132465114]
+[node name="Global" type="Node2D" unique_id=1132465114]
 
 [node name="Player" type="Area2D" parent="." unique_id=1217094484]
 position = Vector2(200, 300)
@@ -25,10 +32,19 @@ shape = SubResource("RectangleShape2D_jcjwt")
 
 [node name="Enemy" type="Area2D" parent="." unique_id=1477371577]
 position = Vector2(1090, 338)
+scale = Vector2(1.2, 1.2)
 script = ExtResource("3_tak36")
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemy" unique_id=1110455594]
+material = SubResource("ShaderMaterial_hp7mx")
 texture = ExtResource("1_54c6x")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy" unique_id=1896575890]
 shape = SubResource("RectangleShape2D_r0b1r")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1344174699]
+z_index = -10
+offset_right = 2100.0
+offset_bottom = 1191.0
+color = Color(0, 0, 0, 1)
+script = ExtResource("4_tjgvb")
