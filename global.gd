@@ -1,6 +1,8 @@
 extends Node2D
 
 
+signal health_updated(team, health, max_health)
+
 var width
 var height
 

@@ -5,6 +5,9 @@
 [ext_resource type="Shader" uid="uid://bryc1jesnxsj0" path="res://flash.gdshader" id="3_hp7mx"]
 [ext_resource type="Script" uid="uid://bljvxvt70cepj" path="res://enemy.gd" id="3_tak36"]
 [ext_resource type="Script" uid="uid://33y06bll57yw" path="res://background.gd" id="4_tjgvb"]
+[ext_resource type="Script" uid="uid://dqfnvqjci1i6j" path="res://center_container.gd" id="6_64pp6"]
+[ext_resource type="StyleBox" uid="uid://cso7p3mknrd7b" path="res://progress_background.tres" id="6_x7b4e"]
+[ext_resource type="PackedScene" uid="uid://ck47yo520kwe2" path="res://heart_symbol.tscn" id="7_u36t3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x7b4e"]
 shader = ExtResource("3_hp7mx")
@@ -21,6 +24,22 @@ shader_parameter/brightness = 0.8
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0b1r"]
 size = Vector2(122, 122)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qnq3c"]
+bg_color = Color(0.0703, 0.37, 0.09527498, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0aw6e"]
+bg_color = Color(0.37, 0.08510001, 0.12308663, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+corner_detail = 4
 
 [node name="Global" type="Node2D" unique_id=1132465114]
 
@@ -57,5 +76,38 @@ offset_right = 2100.0
 offset_bottom = 1191.0
 color = Color(0, 0, 0, 1)
 script = ExtResource("4_tjgvb")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=533611569]
+offset_right = 1920.0
+offset_bottom = 150.0
+script = ExtResource("6_64pp6")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer" unique_id=2055895595]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="CenterContainer/HBoxContainer" unique_id=808351819]
+custom_minimum_size = Vector2(800, 20)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_styles/background = ExtResource("6_x7b4e")
+theme_override_styles/fill = SubResource("StyleBoxFlat_qnq3c")
+max_value = 1.0
+value = 1.0
+show_percentage = false
+
+[node name="EnemyHealthBar" type="ProgressBar" parent="CenterContainer/HBoxContainer" unique_id=508353999]
+custom_minimum_size = Vector2(800, 20)
+layout_mode = 2
+theme_override_styles/background = ExtResource("6_x7b4e")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0aw6e")
+max_value = 1.0
+value = 1.0
+fill_mode = 1
+show_percentage = false
+
+[node name="HeartSymbol" parent="." unique_id=2020878969 instance=ExtResource("7_u36t3")]
+position = Vector2(960, 85)
+scale = Vector2(0.35, 0.35)
 
 [connection signal="timeout" from="Enemy/EnemyTimer" to="Enemy" method="_on_enemy_timer_timeout"]

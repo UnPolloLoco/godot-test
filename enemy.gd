@@ -3,7 +3,6 @@ extends Area2D
 
 @onready var bullet_scene = preload("res://bullet.tscn")
 
-
 const BASE_SPEED = 500.0
 const MAX_SPEED = 1800.0
 var direction = Vector2(0,1)

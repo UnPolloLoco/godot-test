@@ -47,3 +47,7 @@ func _physics_process(delta: float) -> void:
 					victim.on_death()
 				else:
 					victim.on_damage()
+					
+				var victim_team = 'enemy' if victim.is_in_group("enemy") else 'ally';
+					
+				Global.health_updated.emit(victim_team, victim.health, victim.max_health)

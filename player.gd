@@ -7,7 +7,8 @@ extends Area2D
 const SPEED = 1100.0
 var direction
 
-var health = 10
+var max_health = 10.0;
+var health = max_health;
 var is_dead = false;
 
 
