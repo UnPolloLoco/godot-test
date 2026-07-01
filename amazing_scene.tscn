@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d1ikl263e7313"]
 
 [ext_resource type="Texture2D" uid="uid://c48ny0gh43exb" path="res://icon.svg" id="1_54c6x"]
+[ext_resource type="Script" uid="uid://brklegh8dunro" path="res://camera_2d.gd" id="1_cjyop"]
 [ext_resource type="Script" uid="uid://dmfnuye5ydtuj" path="res://player.gd" id="1_gmyh6"]
 [ext_resource type="Shader" uid="uid://bryc1jesnxsj0" path="res://flash.gdshader" id="3_hp7mx"]
 [ext_resource type="Script" uid="uid://bljvxvt70cepj" path="res://enemy.gd" id="3_tak36"]
@@ -42,6 +43,10 @@ corner_radius_bottom_left = 8
 corner_detail = 4
 
 [node name="Global" type="Node2D" unique_id=1132465114]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=810039202]
+position = Vector2(960, 540)
+script = ExtResource("1_cjyop")
 
 [node name="Player" type="Area2D" parent="." unique_id=1217094484]
 position = Vector2(200, 300)
@@ -89,21 +94,25 @@ alignment = 1
 [node name="PlayerHealthBar" type="ProgressBar" parent="CenterContainer/HBoxContainer" unique_id=808351819]
 custom_minimum_size = Vector2(800, 20)
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(-30, 0)
 theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
 theme_override_styles/background = ExtResource("6_x7b4e")
 theme_override_styles/fill = SubResource("StyleBoxFlat_qnq3c")
 max_value = 1.0
 value = 1.0
+fill_mode = 1
 show_percentage = false
 
 [node name="EnemyHealthBar" type="ProgressBar" parent="CenterContainer/HBoxContainer" unique_id=508353999]
 custom_minimum_size = Vector2(800, 20)
 layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(30, 0)
 theme_override_styles/background = ExtResource("6_x7b4e")
 theme_override_styles/fill = SubResource("StyleBoxFlat_0aw6e")
 max_value = 1.0
 value = 1.0
-fill_mode = 1
 show_percentage = false
 
 [node name="HeartSymbol" parent="." unique_id=2020878969 instance=ExtResource("7_u36t3")]

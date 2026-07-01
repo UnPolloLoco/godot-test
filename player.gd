@@ -49,7 +49,7 @@ func _input(event: InputEvent) -> void:
 func on_death():
 	if (not is_dead):
 		is_dead = true
-		print('player DEAD')
+		Global.game_ended.emit('lose')
 		
 		Global.damage_flash(self)
 		await get_tree().create_timer(Global.FLASH_DURATION).timeout
@@ -57,5 +57,4 @@ func on_death():
 	
 	
 func on_damage():
-	print('player damaged')
 	Global.damage_flash(self)

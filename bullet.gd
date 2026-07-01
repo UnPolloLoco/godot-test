@@ -13,7 +13,7 @@ var ally_power_magnifier = 1.2
 var enemy_power_magnifier = 0.67
 
 
-func _ready():
+func _ready():	
 	if is_in_group("ally"):
 		direction = Vector2(1,0)
 		speed = base_speed * ally_power_magnifier
@@ -33,7 +33,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	position += direction * speed * delta
 	
-	if has_overlapping_areas():
+	if has_overlapping_areas() and Global.game_status == 'active':
 		for victim in get_overlapping_areas():
 			var self_is_enemy = is_in_group("enemy")
 			var victim_is_enemy = victim.is_in_group("enemy")

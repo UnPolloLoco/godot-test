@@ -10,7 +10,7 @@ var movement_bound_pad = 100
 var max_y
 var min_y
 
-var max_health = 50.0;
+var max_health = 65.0;
 var health = max_health;
 var is_dead = false;
 
@@ -31,6 +31,7 @@ func _ready() -> void:
 	)
 	
 	$EnemyTimer.start()
+	Global.game_ended.connect(_on_game_end)
 
 
 
@@ -41,27 +42,36 @@ func _physics_process(delta: float) -> void:
 		1 - health/max_health
 	)
 
+	if Global.game_status == 'active':
+		
+		# --- Normal movement ---
 	
-	position += direction * speed * delta;
-	position.y = clamp(position.y, min_y, max_y)
-	
-	if position.y == max_y:
-		direction = Vector2(0,-1);
-	elif position.y == min_y:
-		direction = Vector2(0,1);
+		position += direction * speed * delta;
+		position.y = clamp(position.y, min_y, max_y)
+		
+		if position.y == max_y:
+			direction = Vector2(0,-1);
+		elif position.y == min_y:
+			direction = Vector2(0,1);
+			
+	elif Global.game_status == 'lose':
+		
+		# --- Move to center ---
+		pass
+		
+		
 
 
 func on_death():
 	if (not is_dead):
 		is_dead = true
-		print('enemy DEAD')
+		Global.game_ended.emit('win')
 		
 		Global.damage_flash(self)
 		await get_tree().create_timer(Global.FLASH_DURATION).timeout
 		queue_free()
 
 func on_damage():
-	print('enenmy damaged')
 	Global.damage_flash(self)
 
 
@@ -76,3 +86,7 @@ func _on_enemy_timer_timeout() -> void:
 		get_tree().root.add_child(new_bullet)
 		
 	total_timer_runs += 1
+
+
+func _on_game_end(result):
+	$EnemyTimer.stop()
