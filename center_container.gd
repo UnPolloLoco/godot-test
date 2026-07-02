@@ -10,11 +10,13 @@ func _ready() -> void:
 
 
 func _on_health_update(team, health, max_health):
-	if team == 'enemy':
-		enemy_health_bar.max_value = max_health
-		enemy_health_bar.value = health
-	elif team == 'ally':
-		player_health_bar.max_value = max_health
-		player_health_bar.value = health
-	else:
-		print('Healthbar update does not have a team!')
+	var this_bar
+	
+	if team == 'enemy': this_bar = enemy_health_bar
+	elif team == 'ally': this_bar = player_health_bar
+	else: print('Healthbar update does not have a team!')
+		
+	this_bar.max_value = max_health
+	this_bar.value = health
+	
+	Global.health_bar_flash(this_bar)
