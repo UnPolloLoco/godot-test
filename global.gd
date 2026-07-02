@@ -29,9 +29,8 @@ func damage_flash(target):
 		target.get_node('Sprite2D').material.set_shader_parameter('enabled', false)
 		
 
-func health_bar_flash(target):
+func health_bar_flash(target, original_color):
 	var style = target.get_theme_stylebox('fill')
-	var original_color = style.bg_color
 
 	style.bg_color = original_color * 4.0
 	await get_tree().create_timer(HEALTH_FLASH_DURATION).timeout
