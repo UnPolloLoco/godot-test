@@ -20,7 +20,7 @@ func _ready() -> void:
 		Global.height / 2
 	)
 	
-	modulate = Color(0, 1, 0)
+	$Sprite2D.modulate = Color(0, 1, 0)
 
 
 func _physics_process(delta: float) -> void:
@@ -53,7 +53,8 @@ func on_death():
 		
 		Global.damage_flash(self)
 		await get_tree().create_timer(Global.FLASH_DURATION).timeout
-		queue_free()
+		#queue_free()
+		$Sprite2D.hide()
 	
 	
 func on_damage():

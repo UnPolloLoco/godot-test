@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://brklegh8dunro" path="res://camera_2d.gd" id="1_cjyop"]
 [ext_resource type="Script" uid="uid://dmfnuye5ydtuj" path="res://player.gd" id="1_gmyh6"]
 [ext_resource type="Shader" uid="uid://bryc1jesnxsj0" path="res://flash.gdshader" id="3_hp7mx"]
+[ext_resource type="PackedScene" uid="uid://lt14al788uit" path="res://hit_particles.tscn" id="3_ok3sf"]
 [ext_resource type="Script" uid="uid://bljvxvt70cepj" path="res://enemy.gd" id="3_tak36"]
 [ext_resource type="Script" uid="uid://33y06bll57yw" path="res://background.gd" id="4_tjgvb"]
 [ext_resource type="Script" uid="uid://dqfnvqjci1i6j" path="res://center_container.gd" id="6_64pp6"]
@@ -53,6 +54,8 @@ position = Vector2(200, 300)
 scale = Vector2(0.6, 0.6)
 script = ExtResource("1_gmyh6")
 
+[node name="GPUParticles2D" parent="Player" unique_id=1264631886 instance=ExtResource("3_ok3sf")]
+
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1090403495]
 material = SubResource("ShaderMaterial_x7b4e")
 texture = ExtResource("1_54c6x")
@@ -64,6 +67,9 @@ shape = SubResource("RectangleShape2D_jcjwt")
 position = Vector2(1090, 338)
 scale = Vector2(1.2, 1.2)
 script = ExtResource("3_tak36")
+
+[node name="GPUParticles2D" parent="Enemy" unique_id=1708376427 instance=ExtResource("3_ok3sf")]
+scale = Vector2(-2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemy" unique_id=1110455594]
 material = SubResource("ShaderMaterial_hp7mx")

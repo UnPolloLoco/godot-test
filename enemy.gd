@@ -23,7 +23,7 @@ func _ready() -> void:
 	min_y = movement_bound_pad
 	max_y = Global.height - movement_bound_pad
 	
-	modulate = Color(2, 0.3, 0.4)
+	$Sprite2D.modulate = Color(2, 0.3, 0.4)
 	
 	position = Vector2(
 		Global.width - 300,
@@ -69,7 +69,8 @@ func on_death():
 		
 		Global.damage_flash(self)
 		await get_tree().create_timer(Global.FLASH_DURATION).timeout
-		queue_free()
+		#queue_free()
+		$Sprite2D.hide()
 
 func on_damage():
 	Global.damage_flash(self)

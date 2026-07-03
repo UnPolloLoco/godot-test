@@ -24,9 +24,13 @@ func _ready():
 
 func damage_flash(target):
 	target.get_node('Sprite2D').material.set_shader_parameter('enabled', true)
+	target.get_node('GPUParticles2D').emitting = true
+	
 	await get_tree().create_timer(FLASH_DURATION).timeout
+	
 	if is_instance_valid(target):
 		target.get_node('Sprite2D').material.set_shader_parameter('enabled', false)
+		target.get_node('GPUParticles2D').emitting = false
 		
 
 func health_bar_flash(target, original_color):
