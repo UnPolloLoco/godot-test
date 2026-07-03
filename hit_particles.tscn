@@ -24,7 +24,7 @@ scale_max = 0.17999999
 color = Color(4.6395698, 2.9619844, 1.1687031, 1)
 alpha_curve = SubResource("CurveTexture_cjyop")
 
-[node name="GPUParticles2D" type="GPUParticles2D" unique_id=1264631886]
+[node name="HitParticles" type="GPUParticles2D" unique_id=1264631886]
 z_index = -1
 scale = Vector2(1.6666666, 1.6666666)
 emitting = false

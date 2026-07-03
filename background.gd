@@ -19,6 +19,7 @@ func _ready() -> void:
 			randi_range(0, Global.width),
 			randi_range(0, Global.height)
 		)
+		new_star.position -= position # offset bg position
 		
 		# --- Resize star ---
 		

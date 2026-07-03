@@ -11,6 +11,8 @@ var max_health = 10.0;
 var health = max_health;
 var is_dead = false;
 
+const EXPLOSION_DURATION = 0.4
+
 
 func _ready() -> void:
 	add_to_group("ally")
@@ -24,12 +26,16 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	var fps = (1/delta)
+	if fps < 59.9: print(fps)
+	
 	direction = Vector2(
 		Input.get_axis("left", "right"),
 		Input.get_axis("up", "down")
 	); 
 	
-	position += direction.normalized() * SPEED * delta
+	if Global.game_status == 'active':
+		position += direction.normalized() * SPEED * delta
 
 
 func _input(event: InputEvent) -> void:
@@ -52,10 +58,13 @@ func on_death():
 		Global.game_ended.emit('lose')
 		
 		Global.damage_flash(self)
+		Global.death_explosion(self)
+		Global.set_screen_shake(10)
+		
 		await get_tree().create_timer(Global.FLASH_DURATION).timeout
-		#queue_free()
 		$Sprite2D.hide()
 	
 	
 func on_damage():
 	Global.damage_flash(self)
+	Global.set_screen_shake(4)

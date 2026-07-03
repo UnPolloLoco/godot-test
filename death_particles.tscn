@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://cb1tsxbycmrmh"]
+
+[ext_resource type="Texture2D" uid="uid://c48ny0gh43exb" path="res://icon.svg" id="1_drk02"]
+
+[sub_resource type="Curve" id="Curve_oa2wp"]
+_data = [Vector2(0.61694914, 0.99553573), 0.0, 0.0, 0, 0, Vector2(0.9965928, 0.0065358877), -8.021992, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nqau4"]
+curve = SubResource("Curve_oa2wp")
+
+[sub_resource type="Gradient" id="Gradient_c73c5"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.11099585, 0.24377593, 0.7396265)
+colors = PackedColorArray(1.4236968, 1.105999, 0.94714993, 1, 1.523889, 0.52617085, 0, 1, 1, 0.07999998, 0.07999998, 1, 0.083416395, 0.08293655, 0.054625787, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ek270"]
+gradient = SubResource("Gradient_c73c5")
+
+[sub_resource type="Curve" id="Curve_hdnfr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.23214293), -2.218045, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ok3sf"]
+curve = SubResource("Curve_hdnfr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jcjwt"]
+lifetime_randomness = 0.2
+particle_flag_disable_z = true
+angle_min = -179.99998
+angle_max = 180.00002
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 248.65
+initial_velocity_max = 409.38998
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = -2.2351742e-05
+gravity = Vector3(0, 0, 0)
+damping_min = 160.0
+damping_max = 160.0
+scale_curve = SubResource("CurveTexture_ok3sf")
+color = Color(3.7209148, 3.7209148, 3.7209148, 1)
+color_ramp = SubResource("GradientTexture1D_ek270")
+alpha_curve = SubResource("CurveTexture_nqau4")
+
+[node name="DeathParticles" type="GPUParticles2D" unique_id=2063734586]
+z_index = -1
+rotation = 3.1415925
+scale = Vector2(1.5, 1.5)
+amount = 200
+texture = ExtResource("1_drk02")
+lifetime = 2.0
+speed_scale = 2.48
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_jcjwt")

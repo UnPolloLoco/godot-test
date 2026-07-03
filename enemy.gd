@@ -10,11 +10,13 @@ var movement_bound_pad = 100
 var max_y
 var min_y
 
-var max_health = 65.0;
+var max_health = 5.0;
 var health = max_health;
 var is_dead = false;
 
 var total_timer_runs = 0;
+
+const EXPLOSION_DURATION = 0.7
 
 
 func _ready() -> void:
@@ -68,12 +70,16 @@ func on_death():
 		Global.game_ended.emit('win')
 		
 		Global.damage_flash(self)
+		Global.death_explosion(self)
+		Global.set_screen_shake(15)
+		
 		await get_tree().create_timer(Global.FLASH_DURATION).timeout
-		#queue_free()
 		$Sprite2D.hide()
+
 
 func on_damage():
 	Global.damage_flash(self)
+	Global.set_screen_shake(4)
 
 
 func _on_enemy_timer_timeout() -> void:
