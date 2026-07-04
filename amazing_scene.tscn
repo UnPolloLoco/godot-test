@@ -98,16 +98,23 @@ offset_bottom = 1348.0
 color = Color(0, 0, 0, 1)
 script = ExtResource("4_tjgvb")
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=533611569]
+[node name="HUD" type="Control" parent="." unique_id=1395018116]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD" unique_id=533611569]
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 150.0
 script = ExtResource("6_64pp6")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer" unique_id=2055895595]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/CenterContainer" unique_id=2055895595]
 layout_mode = 2
 alignment = 1
 
-[node name="PlayerHealthBar" type="ProgressBar" parent="CenterContainer/HBoxContainer" unique_id=808351819]
+[node name="PlayerHealthBar" type="ProgressBar" parent="HUD/CenterContainer/HBoxContainer" unique_id=808351819]
 custom_minimum_size = Vector2(800, 20)
 layout_mode = 2
 offset_transform_enabled = true
@@ -120,7 +127,7 @@ value = 1.0
 fill_mode = 1
 show_percentage = false
 
-[node name="EnemyHealthBar" type="ProgressBar" parent="CenterContainer/HBoxContainer" unique_id=508353999]
+[node name="EnemyHealthBar" type="ProgressBar" parent="HUD/CenterContainer/HBoxContainer" unique_id=508353999]
 custom_minimum_size = Vector2(800, 20)
 layout_mode = 2
 offset_transform_enabled = true
@@ -131,7 +138,7 @@ max_value = 1.0
 value = 1.0
 show_percentage = false
 
-[node name="HeartSymbol" parent="." unique_id=2020878969 instance=ExtResource("7_u36t3")]
+[node name="HeartSymbol" parent="HUD" unique_id=2020878969 instance=ExtResource("7_u36t3")]
 position = Vector2(960, 85)
 scale = Vector2(0.35, 0.35)
 

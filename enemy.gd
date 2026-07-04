@@ -10,13 +10,13 @@ var movement_bound_pad = 100
 var max_y
 var min_y
 
-var max_health = 5.0;
+var max_health = 65.0 - 60.0;
 var health = max_health;
 var is_dead = false;
 
 var total_timer_runs = 0;
 
-const EXPLOSION_DURATION = 0.7
+const EXPLOSION_DURATION = 1.1
 
 
 func _ready() -> void:
@@ -55,13 +55,6 @@ func _physics_process(delta: float) -> void:
 			direction = Vector2(0,-1);
 		elif position.y == min_y:
 			direction = Vector2(0,1);
-			
-	elif Global.game_status == 'lose':
-		
-		# --- Move to center ---
-		pass
-		
-		
 
 
 func on_death():

@@ -7,6 +7,11 @@ extends Area2D
 const SPEED = 1100.0
 var direction
 
+const X_BOUNDS = [100, 1400]
+const Y_MARGIN = 110
+var min_x; var max_x
+var min_y; var max_y
+
 var max_health = 10.0;
 var health = max_health;
 var is_dead = false;
@@ -23,6 +28,9 @@ func _ready() -> void:
 	)
 	
 	$Sprite2D.modulate = Color(0, 1, 0)
+	
+	min_y = Y_MARGIN
+	max_y = Global.height - Y_MARGIN
 
 
 func _physics_process(delta: float) -> void:
@@ -36,10 +44,13 @@ func _physics_process(delta: float) -> void:
 	
 	if Global.game_status == 'active':
 		position += direction.normalized() * SPEED * delta
+		
+		position.x = clamp(position.x, X_BOUNDS[0], X_BOUNDS[1])
+		position.y = clamp(position.y, min_y, max_y)
 
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
+	if event is InputEventKey and Global.game_status == 'active':
 		
 		# Shoot bullet
 		if event.is_action_pressed('shoot'):
