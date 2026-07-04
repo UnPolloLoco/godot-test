@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cb1tsxbycmrmh"]
 
-[ext_resource type="Texture2D" uid="uid://c48ny0gh43exb" path="res://icon.svg" id="1_drk02"]
+[ext_resource type="Texture2D" uid="uid://c48ny0gh43exb" path="res://assets/icon.svg" id="1_drk02"]
 
 [sub_resource type="Curve" id="Curve_oa2wp"]
 _data = [Vector2(0.61694914, 0.99553573), 0.0, 0.0, 0, 0, Vector2(0.9965928, 0.0065358877), -8.021992, 0.0, 0, 0]

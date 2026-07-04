@@ -1,7 +1,7 @@
 extends ColorRect
 
 
-@onready var star_scene = preload("res://star.tscn")
+@onready var star_scene = preload("res://scenes/star.tscn")
 
 
 var star_count = 70

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ck47yo520kwe2"]
 
-[ext_resource type="Texture2D" uid="uid://c48ny0gh43exb" path="res://icon.svg" id="1_vynme"]
+[ext_resource type="Texture2D" uid="uid://c48ny0gh43exb" path="res://assets/icon.svg" id="1_vynme"]
 
 [node name="HeartSymbol" type="Node2D" unique_id=2020878969]
 rotation = -0.7855044

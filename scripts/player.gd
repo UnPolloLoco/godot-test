@@ -1,7 +1,7 @@
 extends Area2D
 
 
-@onready var bullet_scene = preload("res://bullet.tscn")
+@onready var bullet_scene = preload("res://scenes/bullet.tscn")
 
 
 const SPEED = 1100.0
